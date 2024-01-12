@@ -40,8 +40,11 @@ def filter_python():
     # Drops .ipynb :( (need a solution for this)
 
     df = pd.read_csv("csv/data.csv")
-    df = df.drop(columns=["Jupyter Notebook"])
-    print(df)
+    column_to_drop = "Jupyter Notebook"
+    if column_to_drop in df.columns:
+        df = df.drop(columns=[column_to_drop])
+    else:
+        print(f"Column '{column_to_drop}' not found in the DataFrame.")
     df.to_csv("csv/stats.csv", index=False)
 
 def sum_languages():
